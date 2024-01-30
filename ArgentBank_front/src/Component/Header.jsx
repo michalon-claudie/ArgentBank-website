@@ -11,7 +11,7 @@ function Header(){
             <img className="main-nav-logo-image" src={argentBankLogo} alt="Argent Bank Logo"/>
             <h1 className="sr-only">Argent Bank</h1>
         </Link>
-        <Link to="/sign-in" class="main-nav-item">
+        <Link to="/sign-in" className="main-nav-item">
         <FontAwesomeIcon icon={faUserCircle} />Sign In
         </Link>
     </nav>
