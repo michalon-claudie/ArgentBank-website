@@ -3,9 +3,7 @@ import '../designs/css/main.css'
 import Header from '../Component/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import authReducer, { loginRequest } from './authSlice';
 import Footer from '../Component/Footer'
 
 export default function SignIn(){
@@ -36,7 +34,7 @@ const LoginButton = () => {
                         <input type="checkbox" id="remember-me"/>
                         <label htmlFor="remember-me"> Remember me</label>
                     </div>
-                    <Link onClick={handleLogin} className="sign-in-button">Sign In</Link>
+                    <button onClick={handleLogin} className="sign-in-button">Sign In</button>
                 </form>
             </section>
         </main>
