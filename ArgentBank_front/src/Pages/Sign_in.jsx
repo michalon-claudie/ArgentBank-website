@@ -4,9 +4,18 @@ import Header from '../Component/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import authReducer, { loginRequest } from './authSlice';
 import Footer from '../Component/Footer'
 
 export default function SignIn(){
+
+const LoginButton = () => {
+    const dispatch = useDispatch();
+
+    const handleLogin = () => {
+        dispatch(loginRequest());
+    };
     return(
         <>
         <Header/>
@@ -27,11 +36,11 @@ export default function SignIn(){
                         <input type="checkbox" id="remember-me"/>
                         <label htmlFor="remember-me"> Remember me</label>
                     </div>
-                    <Link to="/User" className="sign-in-button">Sign In</Link>
+                    <Link onClick={handleLogin} className="sign-in-button">Sign In</Link>
                 </form>
             </section>
         </main>
         <Footer/>
         </>
     )
-}
+}}
