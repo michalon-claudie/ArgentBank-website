@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import '../designs/css/main.css'
 import Header from '../Component/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { loginRequest } from '../Redux/Reducers/AuthReducers';
 import Footer from '../Component/Footer'
 
 export default function SignIn(){
@@ -21,7 +22,8 @@ const FetchHandleLogin = async(e) => {
         body: JSON.stringify({username, password})
     })
     const data = await response.json()
-    dispatch(loginRequest(username, password));
+    const token = data.body.token
+    dispatch(loginRequest({token}));
 
     }catch(error) {
         console.log(error)}
