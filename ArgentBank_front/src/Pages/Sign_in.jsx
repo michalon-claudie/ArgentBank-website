@@ -9,10 +9,24 @@ import Footer from '../Component/Footer'
 export default function SignIn(){
 
 const dispatch = useDispatch();
+const [username, setUsername] = useState('')
+const [password, setPassword] = useState('')
 
-const handleLogin = () => {
+const FetchHandleLogin = async(e) => {
+    e.preventDefault()
+    try{
+        const response = await fetch ("http://localhost:3001/api/v1/user/login",{
+        method: "POST",
+        headers:{"Content-type" :"application/json"},
+        body: JSON.stringify({username, password})
+    })
+    const data = await response.json()
     dispatch(loginRequest(username, password));
-};
+
+    }catch(error) {
+        console.log(error)}
+    }
+    
     return(
         <>
         <Header/>
@@ -20,7 +34,7 @@ const handleLogin = () => {
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faUserCircle} />
                 <h1>Sign In</h1>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={FetchHandleLogin}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" />
