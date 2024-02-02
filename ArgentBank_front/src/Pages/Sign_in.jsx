@@ -4,6 +4,7 @@ import Header from '../Component/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { loginRequest } from '../Redux/Reducers/AuthReducers';
 import Footer from '../Component/Footer'
 
@@ -13,17 +14,23 @@ const dispatch = useDispatch();
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
 
+const navigate=useNavigate();
+
 const FetchHandleLogin = async(e) => {
     e.preventDefault()
     try{
         const response = await fetch ("http://localhost:3001/api/v1/user/login",{
         method: "POST",
         headers:{"Content-type" :"application/json"},
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({email:username, password})
     })
     const data = await response.json()
     const token = data.body.token
-    dispatch(loginRequest({token}));
+    if(token){
+    dispatch(loginRequest({token}))
+    localStorage.setItem('token', token)
+    navigate("/user")
+}
 
     }catch(error) {
         console.log(error)}
