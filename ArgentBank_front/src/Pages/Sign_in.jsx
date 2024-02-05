@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { loginRequest } from '../Redux/Reducers/AuthReducers';
+import { loginSuccess } from '../Redux/Reducers/AuthReducers';
 import Footer from '../Component/Footer'
 
 export default function SignIn(){
@@ -27,7 +27,7 @@ const FetchHandleLogin = async(e) => {
     const data = await response.json()
     const token = data.body.token
     if(token){
-    dispatch(loginRequest({token}))
+    dispatch(loginSuccess({token}))
     localStorage.setItem('token', token)
     navigate("/user")
 }
