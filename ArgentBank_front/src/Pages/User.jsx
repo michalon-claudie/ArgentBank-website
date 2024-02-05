@@ -1,13 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import {useState} from 'react'
+import { useSelector } from 'react-redux';
 import Header from '../Component/Header'
 import Account from '../Component/Account'
 import Footer from '../Component/Footer'
 
 function User(){
     const [userData, setUserData] = useState(null);
+    const token = useSelector(state => state.auth.token);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
         if (token) {
             fetchUserData(token);
         }
@@ -15,7 +17,7 @@ function User(){
     const fetchUserData = async (token) => {
         try {
             const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                method: "Post",
+                method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -29,12 +31,12 @@ function User(){
     return(
         <>
         <Header/>
-        <main class="main bg-dark">
-            <div class="header">
-                <h1>Welcome back<br />{userData.firstName + userData.lastName + "!"}</h1>
-                <button class="edit-button">Edit Name</button>
+        <main className="main bg-dark">
+            <div className="header">
+                <h1>Welcome back<br />{userData?.firstName} {userData?.lastName}!</h1>
+                <button className="edit-button">Edit Name</button>
             </div>
-            <h2 class="sr-only">Accounts</h2>
+            <h2 className="sr-only">Accounts</h2>
             <Account
             title={'Argent Bank Checking (x8349)'}
             amount={'$2,082.79'}
