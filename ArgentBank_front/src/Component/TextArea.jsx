@@ -3,7 +3,7 @@ import React from 'react'
 export default function TextArea({label,id,type,onChange,value}){
     return(
         <div>
-            <label>{label}</label>
+            <label htmlFor='label'>{label}</label>
             <input
                 type={type}
                 id={id}

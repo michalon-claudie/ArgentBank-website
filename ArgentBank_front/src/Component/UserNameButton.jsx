@@ -5,10 +5,11 @@ import TextArea from "../Component/TextArea"
 import Button from "../Component/Button"
 
 export default function UserNameButton() {
-    const token = useSelector(state => state.userAuth.token)
+    const token = useSelector(state => state.auth.token)
     const profile = useSelector((state) => state.profile)
     const [isChanging, setIsChanging] = useState(false)
     const [newUserName, setNewUserName] = useState(profile.userName)
+    const [error,setError] = useState("");
 
     const dispatch = useDispatch()
 
@@ -56,16 +57,14 @@ export default function UserNameButton() {
                     <br />
                     <Button
                         className="edit-button"
-                        onClick={editUserName}>
-                        Save
-                    </Button>
+                        onClick={editUserName}
+                        buttonText="Save"/>
                 </div>
             ) : (
                 <Button
                     className="edit-button"
-                    onClick={() => setIsChanging(true)}>
-                    Edit UserName
-                </Button>
+                    onClick={() => setIsChanging(true)}
+                    buttonText="Edit UserName"/>
             )}
         </div>
     )
