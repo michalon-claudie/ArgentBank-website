@@ -8,7 +8,7 @@ export default function UserNameButton() {
     const token = useSelector(state => state.auth.token)
     const profile = useSelector((state) => state.profile)
     const [isChanging, setIsChanging] = useState(false)
-    const [newUserName, setNewUserName] = useState(profile.userName)
+    const [newUserName, setNewUserName] = useState(profile.username)
     const [error,setError] = useState("");
 
     const dispatch = useDispatch()

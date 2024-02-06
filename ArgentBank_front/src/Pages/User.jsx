@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react'
-import {useState} from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux"
 import Header from '../Component/Header'
 import UserNameButton from '../Component/UserNameButton';
 import Account from '../Component/Account'
 import Footer from '../Component/Footer'
+import { setGetProfile } from '../Redux/Reducers/ProfileSlice';
 
 function User(){
-    const [userData, setUserData] = useState(null);
+    const profile = useSelector((state) => state.profile)
     const token = useSelector(state => state.auth.token);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (token) {
@@ -24,7 +25,7 @@ function User(){
                 }
             });
             const data = await response.json();
-            setUserData(data);
+            dispatch(setGetProfile({data}));
         } catch (error) {
             console.log(error);
         }
@@ -34,7 +35,7 @@ function User(){
         <Header/>
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />{userData?.firstName} {userData?.lastName}!</h1>
+                <h1>Welcome back<br />{profile.firstName} {profile.lastName}!</h1>
                 <UserNameButton/>
             </div>
             <h2 className="sr-only">Accounts</h2>
