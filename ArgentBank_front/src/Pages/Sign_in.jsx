@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import '../designs/css/main.css'
+import '../designs/scss/Signin.scss'
 import Header from '../Component/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';

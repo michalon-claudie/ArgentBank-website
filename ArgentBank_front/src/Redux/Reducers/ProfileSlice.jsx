@@ -6,17 +6,18 @@ const profileSlice = createSlice({
         email:"",
         firstName:"",
         lastName:"",
-        username:""
+        userName:""
     },
     reducers: {
         setGetProfile(state, action) {
-            state.email=action.payload.email
-            state.firstName=action.payload.firstName
-            state.lastName=action.payload.lastName
-            state.username=action.payload.username
+        const { email, firstName, lastName, userName } = action.payload.data.body;
+        state.email = email;
+        state.firstName = firstName;
+        state.lastName = lastName;
+        state.userName = userName;
         },
         setEditUsernameProfile(state,action){
-            state.username = action.payload
+            state = { ...state, userName: action.payload };
         },
         resetProfile: () => {
             
