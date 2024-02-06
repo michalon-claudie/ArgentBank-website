@@ -16,10 +16,14 @@ const profileSlice = createSlice({
             state.username=action.payload.username
         },
         setEditUsernameProfile(state,action){
-
+            state.userName = action.payload
+        },
+        resetProfile: () => {
+            return initialState;
+            },
         }
     }
-});
+);
 
-export const { loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { setGetProfile,setEditUsernameProfile,resetProfile } = profileSlice.actions;
 export default authSlice.reducer;
