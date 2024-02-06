@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setEditProfile } from "../../redux/reducers/profileSlice"
+import { setEditUsernameProfile } from "../Redux/Reducers/ProfileSlice"
 import TextArea from "../Component/TextArea"
 import Button from "../Component/Button"
 
@@ -9,7 +9,6 @@ export default function UserNameButton() {
     const profile = useSelector((state) => state.profile)
     const [isChanging, setIsChanging] = useState(false)
     const [newUserName, setNewUserName] = useState(profile.userName)
-    const [error, setError] = useState("")
 
     const dispatch = useDispatch()
 
@@ -35,7 +34,7 @@ export default function UserNameButton() {
             if (!response) {
                 throw new Error("Échec de la mise à jour du nom d'utilisateur")
             }
-            dispatch(setEditProfile(newUserName))
+            dispatch(setEditUsernameProfile(newUserName))
             setIsChanging(false)
         } catch (error) {
             console.log(error)
