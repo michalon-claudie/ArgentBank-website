@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setEditProfile } from "../../redux/reducers/profileSlice"
-import TextInput from "../TextInput/Textinput"
-import Button from "../Button/Button"
+import TextArea from "../Component/TextArea"
+import Button from "../Component/Button"
 
-export default function EditButton() {
+export default function UserNameButton() {
     const token = useSelector(state => state.userAuth.token)
     const profile = useSelector((state) => state.profile)
     const [isChanging, setIsChanging] = useState(false)
@@ -46,7 +46,7 @@ export default function EditButton() {
         <div>
             {isChanging ? (
                 <div>
-                    <TextInput
+                    <TextArea
                         label="Username"
                         id="username"
                         type="text"
