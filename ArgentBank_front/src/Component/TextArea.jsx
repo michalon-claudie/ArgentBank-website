@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function TextArea({label,id,type,onChange,value}){
+export default function TextArea({className,label,id,type,onChange,value}){
     return(
-        <div>
+        <div className={className}>
             <label htmlFor={id}>{label}</label>
             <input
                 type={type}

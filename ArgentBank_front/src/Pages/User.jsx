@@ -36,6 +36,7 @@ function User(){
         <main className="main bg-dark">
             <div className="header">
                 <h1>Welcome back<br />{profile.firstName +""+ profile.lastName + "!"}</h1>
+                <p>Username:{profile.userName}</p>
                 <UserNameButton/>
             </div>
             <h2 className="sr-only">Accounts</h2>

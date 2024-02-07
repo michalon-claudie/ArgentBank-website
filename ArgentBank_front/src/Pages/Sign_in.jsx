@@ -7,13 +7,16 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from '../Redux/Reducers/AuthReducers';
+import TextArea from '../Component/TextArea'
+import Button from '../Component/Button';
 import Footer from '../Component/Footer'
 
 export default function SignIn(){
 
 const dispatch = useDispatch();
-const [username, setUsername] = useState('')
+const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
+const [checkBox, setCheckBox] = useState(false)
 
 const navigate=useNavigate();
 
@@ -23,7 +26,7 @@ const FetchHandleLogin = async(e) => {
         const response = await fetch ("http://localhost:3001/api/v1/user/login",{
         method: "POST",
         headers:{"Content-type" :"application/json"},
-        body: JSON.stringify({email:username, password})
+        body: JSON.stringify({email, password})
     })
     const data = await response.json()
     const token = data.body.token
@@ -32,9 +35,9 @@ const FetchHandleLogin = async(e) => {
     localStorage.setItem('token', token)
     navigate("/user")
 }
-
     }catch(error) {
-        console.log(error)}
+        console.log(error)
+        alert("Nom d'utilisateur ou mot de passe incorrect");}
     }
     
     return(
@@ -45,19 +48,28 @@ const FetchHandleLogin = async(e) => {
                 <FontAwesomeIcon icon={faUserCircle} />
                 <h1>Sign In</h1>
                 <form onSubmit={FetchHandleLogin}>
-                    <div className="input-wrapper">
-                        <label htmlFor="username">Username</label>
-                        <input type="text" id="username" onChange={(e)=>setUsername(e.target.value)}/>
-                    </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={(e)=>setPassword(e.target.value)}/>
-                    </div>
-                    <div className="input-remember">
-                        <input type="checkbox" id="remember-me"/>
-                        <label htmlFor="remember-me"> Remember me</label>
-                    </div>
-                    <button className="sign-in-button">Sign In</button>
+                <TextArea
+                    className="input-wrapper"
+                    label="E-mail"
+                    id="email"
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}/>
+                <TextArea
+                    className="input-wrapper"
+                    label="Password"
+                    id="password"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}/> 
+                <TextArea
+                    className="input-remember"
+                    label="Remember me"
+                    id="remember-me"
+                    type="checkbox"
+                    onChange={() => setCheckBox(!checkBox)} />   
+                <Button
+                    className="sign-in-button"
+                    buttonText="Sign-in">
+                </Button>
                 </form>
             </section>
         </main>
