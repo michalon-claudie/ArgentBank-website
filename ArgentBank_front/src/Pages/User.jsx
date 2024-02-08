@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import {useNavigate} from 'react-router-dom'
 import Header from '../Component/Header'
 import UserNameButton from '../Component/UserNameButton';
 import Account from '../Component/Account'
@@ -10,10 +11,14 @@ function User(){
     const profile = useSelector((state) => state.profile)
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+    console.log(token) ; 
 
     useEffect(() => {
         if (token) {
             fetchUserData(token);
+        } else {
+            navigate('/sign-in')
         }
     }, []);
     const fetchUserData = async (token) => {
@@ -28,6 +33,8 @@ function User(){
             dispatch(setGetProfile({data}));
         } catch (error) {
             console.log(error);
+            await localStorage.removeItem('token')
+            navigate('/sign-in')
         }
     }
     return(

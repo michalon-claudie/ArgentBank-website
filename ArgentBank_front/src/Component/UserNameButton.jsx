@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setEditUsernameProfile } from "../Redux/Reducers/ProfileSlice"
+import { setGetProfile } from "../Redux/Reducers/ProfileSlice"
 import TextArea from "../Component/TextArea"
 import Button from "../Component/Button"
 
@@ -35,7 +35,8 @@ export default function UserNameButton() {
             if (!response) {
                 throw new Error("Échec de la mise à jour du nom d'utilisateur")
             }
-            dispatch(setEditUsernameProfile(newUserName))
+            const data = await response.json();
+            dispatch(setGetProfile({data}));
             setIsChanging(false)
         } catch (error) {
             console.log(error)
