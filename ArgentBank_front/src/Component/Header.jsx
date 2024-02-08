@@ -8,6 +8,7 @@ import {logout} from '../Redux/Reducers/AuthReducers'
 
 function Header(){
     const token= useSelector(state=>state.auth.token)
+    const profile = useSelector((state) => state.profile)
     const dispatch= useDispatch()
 
     const handleLogout = () => {
@@ -20,11 +21,16 @@ function Header(){
             <h1 className="sr-only">Argent Bank</h1>
         </Link>
         {token ?(
+        <div>
         <Link to="/sign-in" className="main-nav-item" onClick={handleLogout}>
         <FontAwesomeIcon icon={faUserCircle} />Sign Out
-        </Link>) : (
-            <Link to="/sign-in" className="main-nav-item">
-            <FontAwesomeIcon icon={faUserCircle} />Sign In
+        </Link>
+        <Link to="/user" className="main-nav-item">
+        <FontAwesomeIcon icon={faUserCircle} />{profile.userName}
+        </Link>
+        </div>) : (
+        <Link to="/sign-in" className="main-nav-item">
+        <FontAwesomeIcon icon={faUserCircle} />Sign In
         </Link>
         )}
     </nav>
