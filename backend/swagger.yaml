@@ -282,13 +282,13 @@ definitions:
       message:
         type: string
       body:
-        type: array
+        type: object
         properties:
-          account-title:
+          title:
             type: string
-          account-balance:
+          balance:
             type: number
-          account-description:
+          description:
             type: string
   AccountTransactions:
     type: object
@@ -299,19 +299,21 @@ definitions:
         type: string
       body:
         type: array
-        properties:
-          date:
-            type: string
-          description:
-            type: string
-          amount:
-            type: string
-          type:
-            type: string
-          category:
-            type: string
-          note:
-            type: string
+        items:
+          type: object
+          properties:
+            date:
+              type: string
+            description:
+              type: string
+            amount:
+              type: string
+            type:
+              type: string
+            category:
+              type: string
+            note:
+              type: string
   UpdateTransactionDetails:
     type: object
     properties:
