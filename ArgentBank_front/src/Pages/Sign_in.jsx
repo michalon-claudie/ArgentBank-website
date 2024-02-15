@@ -9,6 +9,7 @@ import { loginSuccess } from '../Redux/Reducers/AuthReducers';
 import TextArea from '../Component/TextArea'
 import Button from '../Component/Button';
 import Footer from '../Component/Footer'
+import { FetchHandleLogin } from '../Redux/Api/userApi';
 
 export default function SignIn(){
 
@@ -19,25 +20,10 @@ const [checkBox, setCheckBox] = useState(false)
 
 const navigate=useNavigate();
 
-const FetchHandleLogin = async(e) => {
-    e.preventDefault()
-    try{
-        const response = await fetch ("http://localhost:3001/api/v1/user/login",{
-        method: "POST",
-        headers:{"Content-type" :"application/json"},
-        body: JSON.stringify({email, password})
-    })
-    const data = await response.json()
-    const token = data.body.token
-    if(token){
-    dispatch(loginSuccess({token}))
-    localStorage.setItem('token', token)
-    navigate("/user")
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    await FetchHandleLogin(email, password, dispatch, navigate);
 }
-    }catch(error) {
-        console.log(error)
-        alert("Nom d'utilisateur ou mot de passe incorrect");}
-    }
     
     return(
         <>
@@ -46,7 +32,7 @@ const FetchHandleLogin = async(e) => {
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faUserCircle} />
                 <h1>Sign In</h1>
-                <form onSubmit={FetchHandleLogin}>
+                <form onSubmit={handleSubmit}>
                 <TextArea
                     className="input-wrapper"
                     label="E-mail"

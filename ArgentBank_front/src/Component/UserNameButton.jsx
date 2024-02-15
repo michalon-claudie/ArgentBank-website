@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setGetProfile } from "../Redux/Reducers/ProfileSlice"
 import TextArea from "../Component/TextArea"
 import Button from "../Component/Button"
+import { editUserName } from "../Redux/Api/userApi"
 
 export default function UserNameButton() {
     const token = useSelector(state => state.auth.token)
@@ -14,34 +15,21 @@ export default function UserNameButton() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-    setNewUserName(profile.userName)
-    }, [profile.userName])
-    
-    const editUserName = async (e) => {
-        e.preventDefault()
+        setNewUserName(profile.userName);
+    }, [profile.userName]);
+
+    const handleEditUserName = async () => {
         if (!newUserName) {
-            setError("The field cannot be empty.")
-        return
+            setError("The field cannot be empty.");
+            return;
         }
         try {
-            const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({ userName: newUserName })
-            })
-            if (!response) {
-                throw new Error("Échec de la mise à jour du nom d'utilisateur")
-            }
-            const data = await response.json();
-            dispatch(setGetProfile({data}));
-            setIsChanging(false)
+            await editUserName(newUserName, token, dispatch);
+            setIsChanging(false);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
     return (
         <div>
@@ -58,7 +46,7 @@ export default function UserNameButton() {
                     <br />
                     <Button
                         className="edit-button"
-                        onClick={editUserName}
+                        onClick={handleEditUserName}
                         buttonText="Save"/>
                 </div>
             ) : (

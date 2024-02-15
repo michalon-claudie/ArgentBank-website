@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import {useNavigate} from 'react-router-dom'
 import Header from '../Component/Header'
@@ -6,6 +6,7 @@ import UserNameButton from '../Component/UserNameButton';
 import Account from '../Component/Account'
 import Footer from '../Component/Footer'
 import { setGetProfile } from '../Redux/Reducers/ProfileSlice';
+import { fetchUserData } from '../Redux/Api/userApi';
 
 function User(){
     const profile = useSelector((state) => state.profile)
@@ -16,27 +17,23 @@ function User(){
 
     useEffect(() => {
         if (token) {
-            fetchUserData(token);
+            fetchUserData(token, dispatch, navigate); 
         } else {
-            navigate('/sign-in')
+            navigate('/sign-in');
         }
-    }, []);
-    const fetchUserData = async (token) => {
-        try {
-            const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            const data = await response.json();
-            dispatch(setGetProfile({data}));
-        } catch (error) {
-            console.log(error);
-            await localStorage.removeItem('token')
-            navigate('/sign-in')
-        }
-    }
+    }, [dispatch, navigate, token]);
+
+    const [error, setError] = useState("");
+    const [isChanging, setIsChanging] = useState(false);
+
+    const handleSetError = (errorMessage) => {
+        setError(errorMessage);
+    };
+
+    const handleSetIsChanging = (changingStatus) => {
+        setIsChanging(changingStatus);
+    };
+    
     return(
         <>
         <Header/>
@@ -44,7 +41,7 @@ function User(){
             <div className="header">
                 <h1>Welcome back<br />{profile.firstName +""+ profile.lastName + "!"}</h1>
                 <p>Username:{profile.userName}</p>
-                <UserNameButton/>
+                <UserNameButton setError={handleSetError} setIsChanging={handleSetIsChanging}/>
             </div>
             <h2 className="sr-only">Accounts</h2>
             <Account
