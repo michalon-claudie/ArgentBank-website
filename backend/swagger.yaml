@@ -107,7 +107,7 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Account
       summary: User Account API
       description: get user account
       responses:
@@ -128,7 +128,7 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Account
       summary: Account Transactions API
       description: Get account transactions
       parameters:
@@ -155,7 +155,7 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Account
       summary: Account Transactions API
       description: Get account transactions
       parameters:
@@ -186,7 +186,7 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - User Account
       summary: Account Transactions API
       description:  Get account transactions
       parameters:
@@ -282,7 +282,7 @@ definitions:
       message:
         type: string
       body:
-        type: object
+        type: array
         properties:
           account-title:
             type: string
@@ -291,7 +291,7 @@ definitions:
           account-description:
             type: string
   AccountTransactions:
-    type: object
+    type: array
     properties:
       status:
         type: integer
