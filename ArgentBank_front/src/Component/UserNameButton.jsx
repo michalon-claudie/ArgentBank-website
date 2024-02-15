@@ -16,6 +16,7 @@ export default function UserNameButton() {
     
     useEffect(() => {
         setNewUserName(profile.userName);
+        setIsChanging(false);
     }, [profile.userName]);
 
     const handleEditUserName = async () => {
@@ -24,7 +25,7 @@ export default function UserNameButton() {
             return;
         }
         try {
-            await editUserName(newUserName, token, dispatch);
+            await editUserName(newUserName, token, dispatch,setIsChanging,setError);
             setIsChanging(false);
         } catch (error) {
             console.log(error);
