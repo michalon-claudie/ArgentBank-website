@@ -298,7 +298,7 @@ definitions:
       message:
         type: string
       body:
-        type: object
+        type: array
         properties:
           date:
             type: string
