@@ -38,7 +38,7 @@ export const fetchUserData = async (token, dispatch, navigate) => {
 }
 
 
-export const editUserName = async (newUserName, token, dispatch) => {
+export const editUserName = async (newUserName, token, dispatch, setError, setIsChanging) => {
     if (!newUserName) {
         setError("The field cannot be empty.")
     return

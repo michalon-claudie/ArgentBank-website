@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setGetProfile } from "../Redux/Reducers/ProfileSlice"
 import TextArea from "../Component/TextArea"
 import Button from "../Component/Button"
 import { editUserName } from "../Redux/Api/userApi"
@@ -14,6 +13,7 @@ export default function UserNameButton() {
 
     const dispatch = useDispatch()
 
+    
     useEffect(() => {
         setNewUserName(profile.userName);
     }, [profile.userName]);
@@ -30,6 +30,7 @@ export default function UserNameButton() {
             console.log(error);
         }
     };
+    
 
     return (
         <div>

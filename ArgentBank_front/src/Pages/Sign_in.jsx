@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { loginSuccess } from '../Redux/Reducers/AuthReducers';
 import TextArea from '../Component/TextArea'
 import Button from '../Component/Button';
 import Footer from '../Component/Footer'

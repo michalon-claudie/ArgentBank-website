@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import {useNavigate} from 'react-router-dom'
 import Header from '../Component/Header'
 import UserNameButton from '../Component/UserNameButton';
 import Account from '../Component/Account'
 import Footer from '../Component/Footer'
-import { setGetProfile } from '../Redux/Reducers/ProfileSlice';
 import { fetchUserData } from '../Redux/Api/userApi';
 
 function User(){
@@ -23,16 +22,6 @@ function User(){
         }
     }, [dispatch, navigate, token]);
 
-    const [error, setError] = useState("");
-    const [isChanging, setIsChanging] = useState(false);
-
-    const handleSetError = (errorMessage) => {
-        setError(errorMessage);
-    };
-
-    const handleSetIsChanging = (changingStatus) => {
-        setIsChanging(changingStatus);
-    };
     
     return(
         <>
@@ -41,7 +30,7 @@ function User(){
             <div className="header">
                 <h1>Welcome back<br />{profile.firstName +""+ profile.lastName + "!"}</h1>
                 <p>Username:{profile.userName}</p>
-                <UserNameButton setError={handleSetError} setIsChanging={handleSetIsChanging}/>
+                <UserNameButton/>
             </div>
             <h2 className="sr-only">Accounts</h2>
             <Account
