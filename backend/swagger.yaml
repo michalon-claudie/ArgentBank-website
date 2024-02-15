@@ -291,7 +291,7 @@ definitions:
           account-description:
             type: string
   AccountTransactions:
-    type: array
+    type: object
     properties:
       status:
         type: integer
